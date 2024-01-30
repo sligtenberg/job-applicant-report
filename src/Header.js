@@ -1,4 +1,6 @@
 function Header() {
+    // table headers
+    // static component
     return (
         <thead>
             <tr>
