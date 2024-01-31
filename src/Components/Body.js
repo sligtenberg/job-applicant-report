@@ -47,17 +47,17 @@ function Body() {
     const nestedJobs = jobs.map(job => {
         return {
             ...job,
-            people: applicants.filter(applicant => applicant.job_id === parseInt(job.id)).map(applicant => {
+            applicants: applicants.filter(applicant => applicant.job_id === parseInt(job.id)).map(applicant => {
                 return {
                     ...applicant,
                     skills: skills.filter(skill => skill.applicant_id === parseInt(applicant.id))}
             })
         }
-    }).map(job => <JobType key={job.id} jobType={job} />)
+    }).map(nestedJob => <JobType key={nestedJob.id} job={nestedJob} />)
 
     return (
         <tbody>
-            {nestedJobs}
+            {/* {nestedJobs} */}
         </tbody>
     );
 }

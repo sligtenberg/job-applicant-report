@@ -1,7 +1,15 @@
-function JobType({ jobType }) {
-    console.log(jobType)
+function JobType({ job }) {
+    console.log(job)
+
+    const rows = [
+        <tr>
+            <td key={job.id}>{job.name}</td>
+            <td></td>
+        </tr>
+    ]
+
     return (
-        <tr></tr>
+        rows
     );
 }
 

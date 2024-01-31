@@ -1,17 +1,24 @@
-import HeaderCell from "./HeaderCell"
+import Cell from "./Cell"
 
 function Header() {
     // table headers
 
+    // column titles
+    const text = [
+        "Job",
+        "Applicant Name",
+        "Email Address",
+        "Website",
+        "Skills",
+        "Cover Letter"
+    ]
+
+    const headers = text.map(title => <Cell key={title} cellData={title} header={true} />)
+
     return (
         <thead>
             <tr>
-                <HeaderCell cellData={"Job"} />
-                <HeaderCell cellData={"Applicant Name"} />
-                <HeaderCell cellData={"Email Address"} />
-                <HeaderCell cellData={"Website"} />
-                <HeaderCell cellData={"Skills"} />
-                <HeaderCell cellData={"Cover Letter"} />
+                {headers}
             </tr>
         </thead>
     );
