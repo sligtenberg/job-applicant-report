@@ -1,56 +1,63 @@
 import { useEffect, useState } from "react";
+import JobType from "./JobType";
 
 function Body() {
     // table body
 
     /* **************************************************
-    This component relies on three separate fetch requests to get the data,
-    and then nests the data manually. It would be an improvement to take
-    advantage of the relational nature of the database and only make one
-    fetch request and receive data that is already nested. This would be more
-    work for the backend, less work for the frontend and much more elegant.
+    This component makes three separate fetch requests, receives flat data, 
+    then nests the data manually in an object. It would be better to take
+    advantage of the relational nature of the database, only make one
+    fetch request, and receive nested data. This would require more work
+    on the backend, less work for the frontend, and would be more elegant.
 
     At this time, I do not know how to fetch json data as one nested object.
     ************************************************** */
 
-    // job types
+    // flat data held in state
     const [jobs, setJobs] = useState([])
     const [applicants, setApplicants] = useState([])
     const [skills, setSkills] = useState([])
 
+    // fetch data directly from json file
     useEffect(() => {
-        // fetch job types from server
+        // job types
         fetch('http://localhost:3000/jobs').then(rspns => {
             if (rspns.ok) rspns.json().then(setJobs)
-            else console.log("fetch error") // dev only
+            else console.log(rspns) // dev only
         })
 
-        // fetch applicants from server
+        // applicants
         fetch('http://localhost:3000/applicants').then(rspns => {
             if (rspns.ok) rspns.json().then(setApplicants)
-            else console.log("fetch error") // dev only
+            else console.log(rspns) // dev only
         })
 
-        // fetch skills from server
+        // skills
         fetch('http://localhost:3000/skills').then(rspns => {
             if (rspns.ok) rspns.json().then(setSkills)
-            else console.log("fetch error") // dev only
+            else console.log(rspns) // dev only
         })
-
     }, [])
 
-    // create nested object from json data
-    const jobObject = jobs.map(job => {
+    // nestedJobs is an array of JobType components.
+    // each JobType component gets passed a jobType prop which is a
+    // nested object constructed from the flat json data held in state.
+    // this type of construction should probably be handled by the backend
+    const nestedJobs = jobs.map(job => {
         return {
-            jobName: job.name,
+            ...job,
             people: applicants.filter(applicant => applicant.job_id === parseInt(job.id)).map(applicant => {
-                return {...applicant, skills: skills.filter(skill => skill.applicant_id === parseInt(applicant.id))}
+                return {
+                    ...applicant,
+                    skills: skills.filter(skill => skill.applicant_id === parseInt(applicant.id))}
             })
         }
-    })
+    }).map(job => <JobType key={job.id} jobType={job} />)
 
     return (
         <tbody>
+            {nestedJobs}
         </tbody>
     );
 }
