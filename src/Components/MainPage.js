@@ -4,7 +4,7 @@ import Header from "./Header";
 
 function MainPage() {
     return (
-        <table class="job-applicants">
+        <table className="job-applicants">
             <Header />
             <Body />
             <Footer />

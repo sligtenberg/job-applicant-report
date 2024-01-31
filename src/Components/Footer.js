@@ -4,7 +4,7 @@ function Footer({ numApplicants = 0, numUniqSkills = 0 }) {
     return (
         <tfoot>
             <tr>
-                <td colspan="6">{numApplicants} Applicants, {numUniqSkills} Unique Skills</td>
+                <td colSpan="6">{numApplicants} Applicants, {numUniqSkills} Unique Skills</td>
             </tr>
         </tfoot>
     );
