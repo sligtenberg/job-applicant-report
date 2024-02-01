@@ -1,4 +1,5 @@
-import Cell from "./Cell"
+import TableCellInLineStyle from "./TableCellInlineStyle";
+import Cell from "./TableCellInlineStyle"
 
 function Header() {
     // table headers
@@ -13,7 +14,7 @@ function Header() {
         "Cover Letter"
     ]
 
-    const headers = titles.map(title => <Cell key={title} text={title} header={true} />)
+    const headers = titles.map(title => <th key={title}><TableCellInLineStyle text={title} /></th>)
 
     return (
         <thead>

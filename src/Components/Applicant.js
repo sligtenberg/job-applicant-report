@@ -1,8 +1,9 @@
 import Skill from "./Skill";
 
-function Applicant({ job, applicant, skills, numJobRows }) {
+function Applicant({ jobName, applicant, numJobRows }) {
 
     // /* PARALLEL DATA */
+    // to use the parallel data approach, add {skills} to prop import
     // // the first skill component also needs the applicant data
     // const skillComponents = [
     //     <Skill
@@ -34,10 +35,10 @@ function Applicant({ job, applicant, skills, numJobRows }) {
     const skillComponents = applicant.skills.map((skill, index) =>
             <Skill
                 key={skill.id}
-                skill={skill}
+                jobName={index === 0 ? jobName : null}
                 applicant={index === 0 ? applicant : null}
-                job={index === 0 ? job : null}
-                numSkills={index === 0 ? applicant.skills.length : null}
+                skillName={skill.name}
+                numSkills={applicant.skills.length}
                 numJobRows={numJobRows}
             />
         )
