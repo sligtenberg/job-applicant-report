@@ -1,7 +1,6 @@
 import Skill from "./Skill";
 
 function Applicant({ jobName, applicant, numJobRows }) {
-
     // Each skillComponent eventually corresponds to a row in the table body.
     // The first skill for each applicant must also contain the applicant information.
     // Subsequent skills contain only the skill information.

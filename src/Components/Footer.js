@@ -1,6 +1,4 @@
-function Footer({ numApplicants = 0, numUniqSkills = 0 }) {
-    // table footer
-    // displays number of applicants and unique skills, default 0 if nothing is passed in
+function Footer({ numApplicants, numUniqSkills }) {
     return (
         <tfoot>
             <tr>

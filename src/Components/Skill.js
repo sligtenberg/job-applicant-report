@@ -1,8 +1,6 @@
 import FontStyle from "./FontStyle";
 
 function Skill({ jobName, skillName, applicant, numSkills, numJobRows }) {
-    // deal with blank information like no website
-
     // Construct each table row.
     
     return (
