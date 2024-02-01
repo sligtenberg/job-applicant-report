@@ -4,7 +4,7 @@ function Header() {
     // table headers
 
     // column titles
-    const text = [
+    const titles = [
         "Job",
         "Applicant Name",
         "Email Address",
@@ -13,7 +13,7 @@ function Header() {
         "Cover Letter"
     ]
 
-    const headers = text.map(title => <Cell key={title} cellData={title} header={true} />)
+    const headers = titles.map(title => <Cell key={title} text={title} header={true} />)
 
     return (
         <thead>

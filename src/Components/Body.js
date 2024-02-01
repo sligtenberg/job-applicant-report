@@ -5,16 +5,18 @@ function Body() {
     // table body
 
     /* **************************************************
-    This component makes three separate fetch requests, receives flat data, 
-    then nests the data manually in an object. It would be better to take
-    advantage of the relational nature of the database, only make one
-    fetch request, and receive nested data. This would require more work
-    on the backend, less work for the frontend, and would be more elegant.
+    This component makes three separate fetch requests, receiving parallel data.
+    It would be better to take advantage of the relational nature of the database,
+    only make one fetch request, and receive nested data. This would require a
+    heavier backend, but would be more elegant.
 
-    At this time, I do not know how to fetch json data as one nested object.
+    Future plan:
+    Build a more robust backend that can serve the data in a single relational object.
+    Make one fetch request, receive the data as a pre-nested object,
+    omit nesting the data on the frontend.
     ************************************************** */
 
-    // flat data held in state
+    // parallel data held in state
     const [jobs, setJobs] = useState([])
     const [applicants, setApplicants] = useState([])
     const [skills, setSkills] = useState([])
@@ -22,29 +24,54 @@ function Body() {
     // fetch data directly from json file
     useEffect(() => {
         // job types
-        fetch('http://localhost:3000/jobs').then(rspns => {
+        fetch('/jobs').then(rspns => {
             if (rspns.ok) rspns.json().then(setJobs)
             else console.log(rspns) // dev only
         })
 
         // applicants
-        fetch('http://localhost:3000/applicants').then(rspns => {
+        fetch('/applicants').then(rspns => {
             if (rspns.ok) rspns.json().then(setApplicants)
             else console.log(rspns) // dev only
         })
 
         // skills
-        fetch('http://localhost:3000/skills').then(rspns => {
+        fetch('/skills').then(rspns => {
             if (rspns.ok) rspns.json().then(setSkills)
             else console.log(rspns) // dev only
         })
     }, [])
 
-    // nestedJobs is an array of JobType components.
-    // each JobType component gets passed a jobType prop which is a
+    // /* PARALLEL DATA */
+    // jobComponents is an array of <JobType /> components
+    // const jobComponents = [
+    //     <JobType
+    //         key={jobs[0]?.id}
+    //         job={jobs[0]}
+    //         applicants={applicants.filter(applicant => applicant.job_id === parseInt(jobs[0].id))}
+    //         skills={skills}
+    //     />
+    // ]
+
+    // for (let i = 1; i < jobs.length; i++) {
+    //     jobComponents.push(
+    //         <JobType
+    //             key={jobs[i]?.id}
+    //             job={jobs[i]}
+    //             applicants={applicants.filter(applicant => applicant.job_id === parseInt(jobs[i].id))}
+    //             skills={skills}
+    //         />
+    //     )
+    // }
+
+    /* NESTED DATA */
+    // nestedJobApplicantData is an array of <JobType /> components.
+    // each <JobType /> component gets passed a job prop which is a
     // nested object constructed from the flat json data held in state.
-    // this type of construction should probably be handled by the backend
-    const nestedJobs = jobs.map(job => {
+
+    // Future plan:
+    // nestedJobApplicantData should probably be done on the backend and served as an object
+    const nestedJobApplicantData = jobs.map(job => {
         return {
             ...job,
             applicants: applicants.filter(applicant => applicant.job_id === parseInt(job.id)).map(applicant => {
@@ -57,7 +84,8 @@ function Body() {
 
     return (
         <tbody>
-            {/* {nestedJobs} */}
+            {/* {jobComponents} */}
+            {nestedJobApplicantData}
         </tbody>
     );
 }

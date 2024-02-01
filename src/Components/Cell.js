@@ -1,16 +1,18 @@
-function Cell({ cellData, header }) {
-    // style cells
+function Cell({ text, header=false, rowSpan, className }) {
+    // Cell returns a <th> or <td> html element that is styled according to the model
 
-    const data = 
+    // table cells
+
+    const cell = 
         <font style={{verticalAlign: "inherit"}}>
             <font style={{verticalAlign: "inherit"}}>
-                {cellData}
+                {text}
             </font>
         </font>
 
-    const cell = header ? <th>{data}</th> : <td>{data}</td>
-
-    return cell;
+    return (
+        header ? <th>{cell}</th> : <td rowSpan={rowSpan} className={className}>{cell}</td>
+    );
 }
 
 export default Cell;
