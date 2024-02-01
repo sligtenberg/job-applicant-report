@@ -1,4 +1,4 @@
-import Body from "./Body";
+import Body from "./TableBody";
 import Footer from "./Footer";
 import Header from "./Header";
 
