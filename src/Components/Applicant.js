@@ -26,27 +26,21 @@ function Applicant({ job, applicant, skills, numJobRows }) {
     // }
 
     /* NESTED DATA */
-    // the first skillComponent is special because it needs to include information about the applicant
-    const skillComponents = [
-        <Skill
-            key={applicant.skills[0].id}
-            skill={applicant.skills[0]}
-            applicant={applicant}
-            job={job}
-            numSkills={applicant.skills.length}
-            numJobRows={numJobRows}
-        />
-    ]
 
-    for (let i = 1; i < applicant.skills.length; i++) {
-        skillComponents.push(
+    // each skillComponent eventually corresponds to a row in the table body.
+    // the first skill for each applicant also contains the applicant information
+    // subsequent skills contain only the skill information
+
+    const skillComponents = applicant.skills.map((skill, index) =>
             <Skill
-                key={applicant.skills[i].id}
-                skill={applicant.skills[i]}
+                key={skill.id}
+                skill={skill}
+                applicant={index === 0 ? applicant : null}
+                job={index === 0 ? job : null}
+                numSkills={index === 0 ? applicant.skills.length : null}
+                numJobRows={numJobRows}
             />
         )
-    }
-
 
     return (
         skillComponents

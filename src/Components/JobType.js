@@ -25,25 +25,21 @@ function JobType({ job, applicants, skills }) {
     // }
 
     /* NESTED DATA */
-    // the first applicantComponent is special because it needs to include information about the job
-    const applicantComponents = [
-        <Applicant 
-            key={job.applicants[0].id}
-            applicant={job.applicants[0]}
-            job={job}
-            numJobRows={job.applicants.reduce((acc, applicant) => acc + applicant.skills.length, 0)}
-        />
-    ]
 
-    // subsequent applicantComponents only need applicant information
-    for (let i = 1; i < job.applicants.length; i++) {
-        applicantComponents.push(
+    // map each applicant to an applicantComponent.
+    // each applicantComponent eventually becomes a set of rows,
+    // one row for each of the applicant's skills
+    // the first applicantComponent also contains the job information
+    // subsequent applicantComponents contain only the applicant information
+
+    const applicantComponents = job.applicants.map((applicant, index) =>
             <Applicant
-                key={job.applicants[i].id}
-                applicant={job.applicants[i]}
+                key={applicant.id}
+                applicant={applicant}
+                job={index === 0 ? job : null}
+                numJobRows={index === 0 ? job.applicants.reduce((acc, applicant) => acc + applicant.skills.length, 0) : null}
             />
         )
-    }
 
     return (
         applicantComponents
