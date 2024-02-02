@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 function MainPage() {
 
     /* **************************************************
-    This component makes three separate fetch requests, receiving parallel data.
+    This component makes three separate fetch requests,
+    receiving three separate arrays: jobs, applicants, and skills.
     It would be better to take advantage of the relational nature of the database,
     only make one fetch request, and receive nested data. This would require a
     heavier backend, but is a better division of backend/frontend labor.
