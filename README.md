@@ -8,7 +8,7 @@ Run a json server to see the app in developement mode
 
 React component structure:
 
-MainPage --- Header --< table_data
+MainPage --- Header --< table_data  
          --< JobType --< Applicant --< Skill --< table_data
          --- Footer --- table_data
 
