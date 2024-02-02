@@ -7,6 +7,10 @@ function JobType({ job }) {
     // The first applicantComponent must also contain the job name.
     // Subsequent applicantComponents contain only the applicant.
     // numJobRows is the number of rows needed for the job.
+    // To preserve the row, numJobRows has a min value of 1, in the case of no applicants.
+
+    // (job.applicant.length === 0) indicates there are no applicants for the job.
+    // In this case, we render an empty row
 
     const applicantComponents = job.applicants.map((applicant, index) =>
             <Applicant
@@ -18,7 +22,7 @@ function JobType({ job }) {
         )
 
     return (
-        applicantComponents.length > 0 ? applicantComponents : <tr><td><FontStyle text={job.name}/></td></tr>
+        applicantComponents.length > 0 ? applicantComponents : <tr><td><FontStyle text={job.name}/></td><td><FontStyle text={"No Applicants"}/></td></tr>
     );
 }
 

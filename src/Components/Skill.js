@@ -2,6 +2,7 @@ import FontStyle from "./FontStyle";
 
 function Skill({ jobName, skillName, applicant, numSkills, numJobRows }) {
     // Construct each table row.
+    //console.log(jobName)
     
     return (
         <tr>

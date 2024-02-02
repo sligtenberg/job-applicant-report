@@ -1,4 +1,3 @@
-import FontStyle from "./FontStyle";
 import Skill from "./Skill";
 
 function Applicant({ jobName, applicant, numJobRows }) {
@@ -22,6 +21,7 @@ function Applicant({ jobName, applicant, numJobRows }) {
     if (applicant.skills.length === 0) {
         skillComponents.push(
             <Skill
+                key={applicant.id}
                 jobName={jobName}
                 applicant={applicant}
                 numJobRows={numJobRows}
@@ -30,7 +30,7 @@ function Applicant({ jobName, applicant, numJobRows }) {
     }
 
     return (
-        skillComponents.length > 0 ? skillComponents : <tr><td><FontStyle text={applicant.name}/></td></tr>
+        skillComponents
     );
 }
 
