@@ -1,3 +1,19 @@
+# OnWater Code Challenge - Job Applicant Report
+
+job-applicant-report is a JavaScript and React frontend that turns json data into an HTML page.
+
+There is sample json data in db.json
+
+## Local Implementation
+
+Repo: https://github.com/sligtenberg/job-applicant-report/tree/main
+Node: v20.11.0
+
+Clone the repo down to your local environment.
+Install dependencies: $ npm install
+Start development server: $ json-server --watch db.json
+In a separate terminal open in a browser: npm start
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

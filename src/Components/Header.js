@@ -1,8 +1,6 @@
 import FontStyle from "./FontStyle";
 
 function Header() {
-    // table headers
-
     // column titles
     const titles = [
         "Job",
