@@ -1,4 +1,5 @@
 import Applicant from "./Applicant";
+import FontStyle from "./FontStyle";
 
 function JobType({ job }) {
     // Map each applicant to an applicantComponent.
@@ -12,12 +13,12 @@ function JobType({ job }) {
                 key={applicant.id}
                 jobName={index === 0 ? job.name : null}
                 applicant={applicant}
-                numJobRows={job.applicants.reduce((acc, applicant) => acc + applicant.skills.length, 0)}
+                numJobRows={job.applicants.reduce((acc, applicant) => acc + Math.max(applicant.skills.length, 1), 0)}
             />
         )
 
     return (
-        applicantComponents
+        applicantComponents.length > 0 ? applicantComponents : <tr><td><FontStyle text={job.name}/></td></tr>
     );
 }
 
